@@ -6,6 +6,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public Camera[] cameraManager;
+    [SerializeField] public Transform player;
     public static bool isOnDoor;
     public static bool isOnRoom4 = false;
     private int cameraIndex;
@@ -22,7 +23,13 @@ public class CameraController : MonoBehaviour
         cameraIndex = 0;
         cameraManager[cameraIndex].enabled = true;
     }
-
+    public void doorTrans(int direction)
+    {
+        cameraManager[cameraIndex].enabled = false;
+        cameraIndex += direction;
+        cameraManager[cameraIndex].enabled = true;
+        isOnDoor = false;
+    }
     // Update is called once per frame
     void Update()
     {
