@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
 
     #region Collider Checker
 
+ 
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Ground")
@@ -61,7 +62,8 @@ public class PlayerController : MonoBehaviour
             isLookingLeft = true;
             body.transform.DOMoveX(transform.position.x - 3, 1f);
             collision.gameObject.SetActive(false);
-            Door456.gameObject.SetActive(true);
+            Invoke("reactivate2", 2f);
+            //Door456.gameObject.SetActive(true);
 
         }
         if (collision.gameObject.tag == "Door Right")
@@ -72,13 +74,19 @@ public class PlayerController : MonoBehaviour
                 isLookingLeft = false;
                 body.transform.DOMoveX(transform.position.x + 3, 1f);
             collision.gameObject.SetActive(false);
-            Door123.gameObject.SetActive(true);
+            Invoke("reactivate1",2f);
+            //Door123.gameObject.SetActive(true);
 
 
 
 
         }
     }
+       public void reactivate1()
+    { Door123.gameObject.SetActive(true); }
+    public void reactivate2()
+    { Door456.gameObject.SetActive(true); }
+
     #endregion
 
     #region Dash and Jump
