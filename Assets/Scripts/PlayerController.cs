@@ -170,8 +170,17 @@ public class PlayerController : MonoBehaviour
         }
 
     }
- 
+
 
     #endregion
 
+
+    #region bar is dumb
+
+    public void OnApplicationFocus(bool focus)
+    {
+        
+    }
+
+    #endregion
 }
