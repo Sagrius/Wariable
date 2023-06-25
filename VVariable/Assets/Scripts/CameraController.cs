@@ -10,9 +10,9 @@ public class CameraController : MonoBehaviour
     public static bool isOnDoor;
     public static bool isOnRoom4 = false;
     private int cameraIndex;
-    // Start is called before the first frame update
 
-    
+
+    #region Start
     void Start()
     {
         foreach(Camera currentCamera in cameraManager)
@@ -23,36 +23,35 @@ public class CameraController : MonoBehaviour
         cameraIndex = 0;
         cameraManager[cameraIndex].enabled = true;
     }
-    public void doorTrans(int direction)
+    #endregion
+
+    #region Camera Controll
+    private void CameraActor()
     {
-        cameraManager[cameraIndex].enabled = false;
-        cameraIndex += direction;
-        cameraManager[cameraIndex].enabled = true;
-        isOnDoor = false;
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        if (isOnDoor == true)
+        if (player.transform.position.x <= 11.6f)
         {
-            if (PlayerController.isLookingLeft == true)
-            {
-                cameraManager[cameraIndex].enabled = false;
-                cameraIndex--;
-                cameraManager[cameraIndex].enabled = true;
-                isOnDoor = false;
-            }
-            if (PlayerController.isLookingLeft == false)
-            {
-                cameraManager[cameraIndex].enabled = false;
-                cameraIndex++;
-                cameraManager[cameraIndex].enabled = true;
-                isOnDoor = false;
-            }
-            if (cameraIndex == 3)
-            {
-                isOnRoom4 = true;
-            }
+            cameraManager[0].enabled = true;
+            cameraManager[1].enabled = false;
+            cameraManager[2].enabled = false;
+        }
+        if (player.transform.position.x > 11.61f && player.transform.position.x < 34.25f)
+        {
+            cameraManager[0].enabled = false;
+            cameraManager[1].enabled = true;
+            cameraManager[2].enabled = false;
+        }
+        if (player.transform.position.x >= 34.26f)
+        {
+            cameraManager[0].enabled = false;
+            cameraManager[1].enabled = false;
+            cameraManager[2].enabled = true;
         }
     }
+   
+    void Update()
+    {
+        CameraActor();
+    }
+
+    #endregion
 }

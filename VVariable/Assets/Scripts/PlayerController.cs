@@ -52,40 +52,40 @@ public class PlayerController : MonoBehaviour
 
     }
    
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Door Left")
-        {
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.tag == "Door Left")
+    //    {
 
-            CameraController.isOnDoor = true;
+    //        CameraController.isOnDoor = true;
 
-            isLookingLeft = true;
-            body.transform.DOMoveX(transform.position.x - 3, 1f);
-            collision.gameObject.SetActive(false);
-            Invoke("reactivate2", 2f);
-            //Door456.gameObject.SetActive(true);
+    //        isLookingLeft = true;
+    //        body.transform.DOMoveX(transform.position.x - 3, 1f);
+    //        collision.gameObject.SetActive(false);
+    //        Invoke("reactivate2", 2f);
+    //        //Door456.gameObject.SetActive(true);
 
-        }
-        if (collision.gameObject.tag == "Door Right")
-        {
+    //    }
+    //    if (collision.gameObject.tag == "Door Right")
+    //    {
 
-            CameraController.isOnDoor = true;
+    //        CameraController.isOnDoor = true;
         
-                isLookingLeft = false;
-                body.transform.DOMoveX(transform.position.x + 3, 1f);
-            collision.gameObject.SetActive(false);
-            Invoke("reactivate1",2f);
-            //Door123.gameObject.SetActive(true);
+    //            isLookingLeft = false;
+    //            body.transform.DOMoveX(transform.position.x + 3, 1f);
+    //        collision.gameObject.SetActive(false);
+    //        Invoke("reactivate1",2f);
+    //        //Door123.gameObject.SetActive(true);
 
 
 
 
-        }
-    }
-       public void reactivate1()
-    { Door123.gameObject.SetActive(true); }
-    public void reactivate2()
-    { Door456.gameObject.SetActive(true); }
+    //    }
+    //}
+    //   public void reactivate1()
+    //{ Door123.gameObject.SetActive(true); }
+    //public void reactivate2()
+    //{ Door456.gameObject.SetActive(true); }
 
     #endregion
 
