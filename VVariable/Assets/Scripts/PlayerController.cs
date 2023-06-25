@@ -12,10 +12,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] public Rigidbody2D body;
     [SerializeField] private TrailRenderer TR;
-    [SerializeField] private GameObject Door123;
-    [SerializeField] private GameObject Door456;
-    
-
+   
+   
     [Header ("Movement")]
     [SerializeField] private FixedJoystick joystick;
     [SerializeField] private float _moveSpeed;
@@ -33,10 +31,6 @@ public class PlayerController : MonoBehaviour
     private bool isDashing;
     private bool isButtonPressed = false;
 
-    [Header("Camera Bool")]
-    public static bool isLookingLeft = false;
-    float timer = 2f;
-
     #endregion
 
     #region Collider Checker
@@ -52,40 +46,6 @@ public class PlayerController : MonoBehaviour
 
     }
    
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if (collision.gameObject.tag == "Door Left")
-    //    {
-
-    //        CameraController.isOnDoor = true;
-
-    //        isLookingLeft = true;
-    //        body.transform.DOMoveX(transform.position.x - 3, 1f);
-    //        collision.gameObject.SetActive(false);
-    //        Invoke("reactivate2", 2f);
-    //        //Door456.gameObject.SetActive(true);
-
-    //    }
-    //    if (collision.gameObject.tag == "Door Right")
-    //    {
-
-    //        CameraController.isOnDoor = true;
-        
-    //            isLookingLeft = false;
-    //            body.transform.DOMoveX(transform.position.x + 3, 1f);
-    //        collision.gameObject.SetActive(false);
-    //        Invoke("reactivate1",2f);
-    //        //Door123.gameObject.SetActive(true);
-
-
-
-
-    //    }
-    //}
-    //   public void reactivate1()
-    //{ Door123.gameObject.SetActive(true); }
-    //public void reactivate2()
-    //{ Door456.gameObject.SetActive(true); }
 
     #endregion
 
@@ -141,35 +101,12 @@ public class PlayerController : MonoBehaviour
     }
 
     #endregion
-    void leTimer()
-    {
 
-            timer -= Time.deltaTime;
-            Debug.Log(timer);
-            if (timer <= 0)
-            { 
-                        timer = 2;
-                     CameraController.isOnDoor = false;
-            }
-       
-    }
     #region L/R Movement
 
     private void FixedUpdate()
     {
-        if(CameraController.isOnDoor == true)
-        leTimer();
-        
-
-
-        if (joystick.Horizontal < 0)
-        {
-            isLookingLeft = true;
-        }
-        if (joystick.Horizontal >= 0)
-        {
-            isLookingLeft = false;
-        }
+     
         body.velocity = new Vector2(joystick.Horizontal * _moveSpeed, 0);
 
         if(isButtonPressed == true && canDash == true)
