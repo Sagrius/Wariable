@@ -7,23 +7,6 @@ public class CameraController : MonoBehaviour
 {
     public Camera[] cameraManager;
     [SerializeField] public Transform player;
-    public static bool isOnDoor;
-    public static bool isOnRoom4 = false;
-    private int cameraIndex;
-
-
-    #region Start
-    void Start()
-    {
-        foreach(Camera currentCamera in cameraManager)
-        {
-            currentCamera.enabled = false;
-        }
-
-        cameraIndex = 0;
-        cameraManager[cameraIndex].enabled = true;
-    }
-    #endregion
 
     #region Camera Controll
     private void CameraActor()
