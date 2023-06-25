@@ -1152,7 +1152,7 @@ MonoBehaviour:
   joystick: {fileID: 1150881852}
   _moveSpeed: 15
   _jumpPower: 2500
-  dashingPower: 125
+  dashingPower: 200
 --- !u!50 &1345320849
 Rigidbody2D:
   serializedVersion: 4
