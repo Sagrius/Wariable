@@ -5,10 +5,14 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public Camera[] cameraManager;
-    [SerializeField] public Transform player;
+    #region Variables Region
 
-    #region Camera Controll
+    [SerializeField] public Transform player;
+    public Camera[] cameraManager;
+
+    #endregion
+
+    #region Camera Control
     private void CameraActor()
     {
         if (player.transform.position.x <= 11.6f)
