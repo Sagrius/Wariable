@@ -49,6 +49,21 @@ public class PlayerHP : MonoBehaviour
 
     #endregion
 
+    private void Update()
+    {
+        if (Ads.watchedAd==true && currenthp ==0)
+        {
+            Ads.watchedAd = false;
+            foreach (GameObject heart in hp)
+            {
+                
+                heart.SetActive(true);
+                currenthp = 2;
+                PauseMenu.Pause = false;
+            }
+        }
+    }
+
     #region Collider
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -56,9 +71,10 @@ public class PlayerHP : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             playerGotHitAS.PlayOneShot(playerGotHitSound);
-            Destroy(hp[currenthp]);
+            hp[currenthp].SetActive(false);
             if (currenthp > 0)
             {
+              
                 currenthp--;
             }
             else

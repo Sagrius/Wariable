@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class FinishMiniGame : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class FinishMiniGame : MonoBehaviour
     [SerializeField] public GameObject trap;
     [SerializeField] public GameObject Basketball;
     [SerializeField] public static bool isMiniGameFiished = false;
+    [SerializeField] private GameObject theball;
     
 
     // Start is called before the first frame update
@@ -32,6 +34,8 @@ public class FinishMiniGame : MonoBehaviour
             Destroy(this.gameObject);
             Basketball.SetActive(true);
             isMiniGameFiished = true;
+            theball.transform.DOScale(new Vector3(1, 1, 1), 1).Play();
+            
         }
     }
 }

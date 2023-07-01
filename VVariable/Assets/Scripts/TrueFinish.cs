@@ -24,7 +24,7 @@ public class TrueFinish : MonoBehaviour
     {
         if(collision.gameObject.tag == "Ball")
         {
-            Destroy(dbd);
+            dbd.SetActive(false);
             Destroy(theBall);
             Destroy(basketBall);
 

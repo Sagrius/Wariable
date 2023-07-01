@@ -55,6 +55,17 @@ public class PulledShooting : MonoBehaviour
                             Debug.Log("TouchPos: " + touchPos);
                         }
                     }
+                    else
+                    {
+                        if(touchArray[i].phase==TouchPhase.Moved)
+                        {
+                            Debug.Log("Moved");
+                        }
+                        if (touchArray[i].phase == TouchPhase.Ended)
+                        {
+                            Debug.Log("Ended");
+                        }
+                    }
 
                 }
             }

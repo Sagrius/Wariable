@@ -100,10 +100,12 @@ public class PauseMenu : MonoBehaviour
         if (focus == false)
         {
             Pause = true;
+            PauseMenuPanel.SetActive(true);
         }
         else
         {
-            Pause = false;
+            if(PauseMenuPanel.activeSelf == false) ;
+                Pause = true;
         }
 
     }

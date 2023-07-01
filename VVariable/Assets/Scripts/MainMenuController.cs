@@ -14,11 +14,15 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private GameObject Title;
     #endregion
 
+    #region Start
+
     private void Start()
         {
             Title.transform.DOScale(new Vector3(1, 1, 1), 3).Play().SetEase(Ease.Linear);
         }
-    
+
+    #endregion
+
     #region Buttons
     public void startGame()
     {
@@ -47,7 +51,6 @@ public class MainMenuController : MonoBehaviour
         HowToPlay.SetActive(enabled);
 
     }
-    #endregion
 
-   
+    #endregion  
 }
