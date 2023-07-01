@@ -8,6 +8,10 @@ TagManager:
   - Door
   - Door Right
   - Door Left
+  - Wall
+  - Bullet
+  - Enemy
+  - Ball
   layers:
   - Default
   - TransparentFX

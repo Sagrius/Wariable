@@ -6,10 +6,17 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     #region Variables Region
-
+    [SerializeField] public static Camera cameraToReturn;
     [SerializeField] public Transform player;
     public Camera[] cameraManager;
 
+    #endregion
+
+    #region Update
+    void Update()
+    {
+        CameraActor();
+    }
     #endregion
 
     #region Camera Control
@@ -20,24 +27,22 @@ public class CameraController : MonoBehaviour
             cameraManager[0].enabled = true;
             cameraManager[1].enabled = false;
             cameraManager[2].enabled = false;
+            cameraToReturn = cameraManager[0];
         }
         if (player.transform.position.x > 11.61f && player.transform.position.x < 34.25f)
         {
             cameraManager[0].enabled = false;
             cameraManager[1].enabled = true;
             cameraManager[2].enabled = false;
+            cameraToReturn = cameraManager[1];
         }
         if (player.transform.position.x >= 34.26f)
         {
             cameraManager[0].enabled = false;
             cameraManager[1].enabled = false;
             cameraManager[2].enabled = true;
+            cameraToReturn = cameraManager[2];
         }
-    }
-   
-    void Update()
-    {
-        CameraActor();
     }
 
     #endregion

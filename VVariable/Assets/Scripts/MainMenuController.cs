@@ -7,36 +7,43 @@ using UnityEngine.UI;
 
 public class MainMenuController : MonoBehaviour
 {
-    public AudioSource BGM;
-    public Slider SoundsSlider;
-    public TextMeshProUGUI text;
-    public void Start()
-    {
-        AudioListener.volume = 1;
-    }
+    #region Variables
+    [Header("SerializedFields")]
+    [SerializeField] private GameObject MainMenu;
+    [SerializeField] private GameObject HowToPlay;
+
+    #endregion
+
+
+    #region Buttons
     public void startGame()
     {
         SceneManager.LoadScene(1);
-        
+    }
+    public void OpenHowToPlay()
+    {
+        MainMenu.SetActive(false);
+        HowToPlay.SetActive(true);
     }
     public void exitGame()
     {
         Application.Quit();
     }
-    public void AudioLevel()
+    public void Return()
     {
-        AudioListener.volume = SoundsSlider.value;
-        
+        HowToPlay.SetActive(false);
+        MainMenu.SetActive(true);
     }
-    public void volumeUpdate()
+
+    #endregion
+
+    #region HowToPlay
+    public void HowToPlayPress()
     {
-        var fixedValue = SoundsSlider.value*100;
-        var realfixedValue = (int)fixedValue;
-        text.text = realfixedValue.ToString();
+        HowToPlay.SetActive(enabled);
 
     }
-    public void Update()
-    {
-        volumeUpdate();
-    }
+    #endregion
+
+   
 }

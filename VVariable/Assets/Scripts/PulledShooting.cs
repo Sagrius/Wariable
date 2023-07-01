@@ -1,56 +1,69 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PulledShooting : MonoBehaviour
 {
-    // Start is called before the first frame update
+    
+    #region Variables
+    [Header ("SerializedFields")]
     [SerializeField] private GameObject projectilePrefab;
-    [SerializeField] private Transform projectileSpawnPoint;
-    public Transform endPoint;
-    private List<GameObject> instantiatedProjectiles = new List<GameObject>();
+    [SerializeField] private Transform projectileLeftSpawnPoint;
+    [Header("Variables")]
+    public static Vector3 touchPos;
+    private List<GameObject> instantiatedProjectiles = new();
+    private Touch[] touchArray;
+    private bool canShoot;
 
-    private ResourceRequest _resourceRequest;
+    [Header(("SFX"))]
+    public AudioClip ShootingSound;
+    public AudioSource playerAudioSource;
+    #endregion
 
+    #region Start & Update
     private void Start()
     {
-        
-        for (int i = 0; i < 10; i++)
+        canShoot = true;
+        for (int i = 0; i < 3; i++)
         {
-            var instadProjectile = Instantiate(projectilePrefab, transform);
-            instadProjectile.gameObject.SetActive(false);
-            instantiatedProjectiles.Add(instadProjectile);
+            var instatiatedProjectile = Instantiate(projectilePrefab, transform);
+            instatiatedProjectile.SetActive(false);
+            instantiatedProjectiles.Add(instatiatedProjectile);
         }
-
     }
 
-
-    // Update is called once per frame
     void Update()
     {
-
-        if(Input.touchCount>= 1)
+        if (PauseMenu.Pause == false)
         {
-            Debug.Log("touched");
-            Touch touch = Input.GetTouch(0);
-            Debug.Log($"{touch.position.x},{touch.position.y}");
-            endPoint.position = touch.position;
-            if (touch.phase == TouchPhase.Began)
+            if (Input.touchCount > 0)
             {
-                var projectileToPull = GetObjectFromPool();
-                if (projectileToPull != null)
+                touchArray = new Touch[Input.touchCount];
+
+                for (int i = 0; i < Input.touchCount; i++)
                 {
-                    projectileToPull.gameObject.SetActive(true);
-                    Transform projectileTransform = projectileToPull.transform;
-                    projectileTransform.position = projectileSpawnPoint.position;
-                    projectileTransform.rotation = projectileSpawnPoint.rotation;
+                    Touch touch = Input.GetTouch(i);
+                    touchArray[i] = touch;
+
+                    if (touchArray[i].phase == TouchPhase.Began && !EventSystem.current.IsPointerOverGameObject(touch.fingerId))
+                    {
+                        if (canShoot == true)
+                        {
+                            touchPos = CameraController.cameraToReturn.ScreenToWorldPoint(touch.position);
+                            StartCoroutine(AbleToSpawn());
+                            Debug.Log("TouchPos: " + touchPos);
+                        }
+                    }
+
                 }
             }
         }
-
     }
 
+    #endregion
 
+    #region Object Pulling 
     GameObject GetObjectFromPool()
     {
         foreach (var projectile in instantiatedProjectiles)
@@ -58,11 +71,32 @@ public class PulledShooting : MonoBehaviour
             if (!projectile.gameObject.activeSelf)
                 return projectile;
         }
-
-Debug.LogWarning("No object to pool! we need more objects. Must construct additional objects");
-return null;
+        Debug.LogWarning("No object to pool! we need more objects. Must construct additional objects");
+        return null;
     }
 
-    
+    IEnumerator AbleToSpawn()
+    {
+        canShoot = false;
+        var projectileToPull = GetObjectFromPool();
+        if (projectileToPull != null)
+        {
+            projectileToPull.gameObject.SetActive(true);
+            playerAudioSource.PlayOneShot(ShootingSound);
+
+            projectileToPull.transform.position = projectileLeftSpawnPoint.position;
+        }
+
+        yield return new WaitForSeconds(0.5f);
+        canShoot = true;
+    }
+    #endregion
+
+    #region PullTouchPosition
+    public static Vector3 GiveTouchPos()
+    {
+        return touchPos;
+    }
+    #endregion
 
 }
