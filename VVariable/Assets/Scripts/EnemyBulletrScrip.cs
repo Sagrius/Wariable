@@ -42,7 +42,6 @@ public class EnemyBulletrScrip : MonoBehaviour
         if (PauseMenu.Pause ==false)
         {
             var playerLocation = EnemySpawner.playerLocation;
-            Debug.Log($"{playerLocation.x}, {playerLocation.y}, {playerLocation.z}");
             transform.position = Vector3.MoveTowards(transform.position, playerLocation, bulletSpeed*Time.deltaTime);
         }
        

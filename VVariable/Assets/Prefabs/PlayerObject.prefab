@@ -105,8 +105,12 @@ MonoBehaviour:
   TR: {fileID: 2251032969563980699}
   joystick: {fileID: 0}
   _moveSpeed: 5
-  jumpPower: 50
+  jumpPower: 90
+  rotation: {fileID: 0}
   dashingPower: 200
+  playerAudioSource: {fileID: 310975623210539178}
+  jumpSound: {fileID: 8300000, guid: d46323e22e74e46baa241cbf48c85671, type: 3}
+  dashSound: {fileID: 8300000, guid: fe0b1f9aeb45b41b089175aeeabd5d95, type: 3}
 --- !u!50 &2251032969563980703
 Rigidbody2D:
   serializedVersion: 4
@@ -271,6 +275,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2251032970815024861}
+  - component: {fileID: 310975623210539178}
   m_Layer: 0
   m_Name: PlayerObject
   m_TagString: Untagged
@@ -294,6 +299,102 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &310975623210539178
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2251032970815024860}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &6406460286114307835
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,6 +406,7 @@ GameObject:
   - component: {fileID: 546766408913013204}
   - component: {fileID: 8079202777572362912}
   - component: {fileID: 4807535902040187099}
+  - component: {fileID: 800470006}
   m_Layer: 0
   m_Name: TriggerBox
   m_TagString: Player
@@ -365,6 +467,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a08d127df428c447bcfe8f06364dafd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Skull1: {fileID: 0}
+  Skull2: {fileID: 0}
   deathPannel: {fileID: 0}
-  hp: []
+  hp:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   currenthp: 0
+  playerGotHitAS: {fileID: 310975623210539178}
+  playerGotHitSound: {fileID: 8300000, guid: b9eff218e132a4e76be78840eca96fb2, type: 3}
+  text: {fileID: 0}
+--- !u!114 &800470006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6406460286114307835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0f64af3b14b4a34e9b23e590d4e9acf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  availableEnemies: []
+  realDoor: {fileID: 0}
+  playerPrefab: {fileID: 2251032969563980673}
+  enemiesList:
+  - {fileID: 4191128030894891162, guid: 67f3f451a521363469e911a934fef97d, type: 3}
+  enemiesLocations: []
+  numberOfEnemies: 0

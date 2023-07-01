@@ -2,15 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
+using DG.Tweening;
 
 public class PlayerHP : MonoBehaviour
 {
     #region Variables
 
+    [SerializeField] private Transform Skull1;
+    [SerializeField] private GameObject Skull2;
     [SerializeField] public GameObject deathPannel;
     [SerializeField] public GameObject[] hp;
     [SerializeField] public int currenthp;
+    [SerializeField] public AudioSource playerGotHitAS;
+    [SerializeField] public AudioClip playerGotHitSound;
     public static bool looped = false;
+    [SerializeField] public TextMeshProUGUI text;
 
     #endregion
 
@@ -19,6 +26,9 @@ public class PlayerHP : MonoBehaviour
     void Start()
     {
         currenthp = 2;
+        Skull1.transform.DORotate(new Vector3(0, 0, -60), 2f, RotateMode.FastBeyond360).Play().SetLoops(-1, LoopType.Yoyo).Loops();
+        Skull2.transform.DORotate(new Vector3(0, 0, -60), 2f, RotateMode.FastBeyond360).Play().SetLoops(-1, LoopType.Yoyo).Loops();
+        text.transform.DOShakePosition(0.5f, 10, 5).Play().SetLoops(-1).Loops();
     }
 
     #endregion
@@ -27,12 +37,14 @@ public class PlayerHP : MonoBehaviour
     public void MainMenu()
     {
         SceneManager.LoadScene(0);
+        PauseMenu.Pause = false;
         looped = true;
     }
     public void RestartGame()
     {
         SceneManager.LoadScene(1);
         looped = true;
+        PauseMenu.Pause = false;
     }
 
     #endregion
@@ -43,6 +55,7 @@ public class PlayerHP : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
+            playerGotHitAS.PlayOneShot(playerGotHitSound);
             Destroy(hp[currenthp]);
             if (currenthp > 0)
             {
@@ -51,6 +64,8 @@ public class PlayerHP : MonoBehaviour
             else
             {
                 deathPannel.SetActive(true);
+                PauseMenu.Pause = true;
+
             }
 
         }
