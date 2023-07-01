@@ -5,23 +5,57 @@ using DG.Tweening;
 
 public class FiriedBullet : MonoBehaviour
 {
-    // Start is called before the first frame update
+    #region Variables
+    [SerializeField] private float bulletSpeed;
+    private Vector3 whereToGo;
+    #endregion
 
-    public Transform endPoint;
-    // Start is called before the first frame update
-    void Start()
+    #region Trigger 
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        transform.DOMove(endPoint.position, 10f).OnComplete(GoingDown);
+        if (collision.gameObject.tag == "Wall")
+        {
+
+            gameObject.SetActive(false);
+        }
+        if (collision.gameObject.tag == "Ground")
+        {
+
+            gameObject.SetActive(false);
+        }
+        if (collision.gameObject.tag == "Enemy")
+        {
+
+            gameObject.SetActive(false);
+        }
+
+    }
+    #endregion
+
+    #region Update
+    void FixedUpdate()
+    {
+        BulletMoveTo();
+        
+        //Destroy Bullet on target position
+        if (transform.position == whereToGo)
+        {
+            gameObject.SetActive(false);
+        }
+
+    }
+    #endregion
+
+    #region WhereToGo
+    public Vector3 GetScript()
+    {
+        return PulledShooting.GiveTouchPos();
+    }
+    private void BulletMoveTo()
+    {
+        whereToGo = GetScript();
+        transform.position = Vector3.MoveTowards(transform.position , whereToGo, bulletSpeed * Time.deltaTime);
     }
 
-    public void GoingDown()
-    {
-        gameObject.SetActive(false);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    #endregion
 }
