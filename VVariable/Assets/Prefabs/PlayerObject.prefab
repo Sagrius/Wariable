@@ -406,7 +406,6 @@ GameObject:
   - component: {fileID: 546766408913013204}
   - component: {fileID: 8079202777572362912}
   - component: {fileID: 4807535902040187099}
-  - component: {fileID: 800470006}
   m_Layer: 0
   m_Name: TriggerBox
   m_TagString: Player
@@ -478,22 +477,3 @@ MonoBehaviour:
   playerGotHitAS: {fileID: 310975623210539178}
   playerGotHitSound: {fileID: 8300000, guid: b9eff218e132a4e76be78840eca96fb2, type: 3}
   text: {fileID: 0}
---- !u!114 &800470006
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6406460286114307835}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0f64af3b14b4a34e9b23e590d4e9acf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  availableEnemies: []
-  realDoor: {fileID: 0}
-  playerPrefab: {fileID: 2251032969563980673}
-  enemiesList:
-  - {fileID: 4191128030894891162, guid: 67f3f451a521363469e911a934fef97d, type: 3}
-  enemiesLocations: []
-  numberOfEnemies: 0
