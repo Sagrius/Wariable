@@ -129,9 +129,11 @@ public class PauseMenu : MonoBehaviour
         {
             Pause = true;
             PauseMenuPanel.SetActive(true);
+            BGM.Pause();
         }
         if (focus == true)
         {
+            BGM.Pause();
             Pause = true;
         }
 
