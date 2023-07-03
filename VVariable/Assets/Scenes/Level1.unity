@@ -895,7 +895,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 158584450}
-  - component: {fileID: 158584451}
+  - component: {fileID: 158584452}
   m_Layer: 0
   m_Name: AdsManager
   m_TagString: Untagged
@@ -918,7 +918,7 @@ Transform:
   m_Father: {fileID: 210915345}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &158584451
+--- !u!114 &158584452
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -927,11 +927,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 158584449}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ed280623f446a54f9f2e40603f6feb8, type: 3}
+  m_Script: {fileID: 11500000, guid: 2fa262e24ddd4a448a6a94b5ed34a302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activateAdButton: {fileID: 636877928}
-  deathPanel: {fileID: 1744180954}
+  _androidGameId: 5333552
+  _iOSGameId: 5333553
+  _testMode: 0
 --- !u!4 &159845153 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7568118554565682715, guid: 3bb800b01c4346f4dab86fa42eba9370, type: 3}
@@ -3244,6 +3245,7 @@ GameObject:
   - component: {fileID: 636877930}
   - component: {fileID: 636877929}
   - component: {fileID: 636877928}
+  - component: {fileID: 636877931}
   m_Layer: 5
   m_Name: ReviveButton
   m_TagString: Untagged
@@ -3258,7 +3260,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 636877926}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
@@ -3269,7 +3271,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -223}
+  m_AnchoredPosition: {x: 0, y: -218}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &636877928
@@ -3316,7 +3318,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 158584451}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Ads, Assembly-CSharp
         m_MethodName: ShowAd
         m_Mode: 1
@@ -3366,6 +3368,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 636877926}
   m_CullTransparentMesh: 1
+--- !u!114 &636877931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 636877926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be4b24d3c6393ee4a886a4beef4f8a66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _androidAdUnitId: Rewarded_Android
+  _iOSAdUnitId: Rewarded_iOS
+  _showAdButton: {fileID: 636877928}
+  deathPanel: {fileID: 1744180954}
 --- !u!1 &638637561
 GameObject:
   m_ObjectHideFlags: 0
@@ -5663,10 +5681,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73eb3565cb828af4c94ef0d8c69f97c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  theball: {fileID: 1033590993}
   gyroed: {fileID: 1050847567}
   trap: {fileID: 1411874046}
   Basketball: {fileID: 398919904}
-  theball: {fileID: 1033590993}
   guideArrows: {fileID: 704632670}
 --- !u!1 &984967690
 GameObject:
@@ -7882,6 +7900,11 @@ MonoBehaviour:
 --- !u!4 &1345320851 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2251032969563980701, guid: 2f064a10517d01c45aeb2b9fa5bb4268, type: 3}
+  m_PrefabInstance: {fileID: 2251032970370626574}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &1345320854 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 2251032969563980698, guid: 2f064a10517d01c45aeb2b9fa5bb4268, type: 3}
   m_PrefabInstance: {fileID: 2251032970370626574}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1347308987 stripped
@@ -11811,10 +11834,42 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2251032969563980699, guid: 2f064a10517d01c45aeb2b9fa5bb4268, type: 3}
+      propertyPath: m_Time
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2251032969563980701, guid: 2f064a10517d01c45aeb2b9fa5bb4268, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2251032969563980701, guid: 2f064a10517d01c45aeb2b9fa5bb4268, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2251032969563980702, guid: 2f064a10517d01c45aeb2b9fa5bb4268, type: 3}
+      propertyPath: mybox
+      value: 
+      objectReference: {fileID: 1345320854}
     - target: {fileID: 2251032969563980702, guid: 2f064a10517d01c45aeb2b9fa5bb4268, type: 3}
       propertyPath: joystick
       value: 
       objectReference: {fileID: 1150881852}
+    - target: {fileID: 2251032969563980702, guid: 2f064a10517d01c45aeb2b9fa5bb4268, type: 3}
+      propertyPath: jumpPower
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2251032969563980702, guid: 2f064a10517d01c45aeb2b9fa5bb4268, type: 3}
+      propertyPath: ground.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2251032969563980703, guid: 2f064a10517d01c45aeb2b9fa5bb4268, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2251032969563980703, guid: 2f064a10517d01c45aeb2b9fa5bb4268, type: 3}
+      propertyPath: m_GravityScale
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 2251032970815024860, guid: 2f064a10517d01c45aeb2b9fa5bb4268, type: 3}
       propertyPath: m_Name
       value: PlayerObject
@@ -11879,6 +11934,10 @@ PrefabInstance:
       propertyPath: deathPannel
       value: 
       objectReference: {fileID: 1744180954}
+    - target: {fileID: 4807535902040187099, guid: 2f064a10517d01c45aeb2b9fa5bb4268, type: 3}
+      propertyPath: playerSprite
+      value: 
+      objectReference: {fileID: 1282099287}
     - target: {fileID: 4807535902040187099, guid: 2f064a10517d01c45aeb2b9fa5bb4268, type: 3}
       propertyPath: hp.Array.data[0]
       value: 
@@ -11967,6 +12026,10 @@ PrefabInstance:
     - target: {fileID: 2851360469630375860, guid: c0452cca82741604f9bdf5e0cfcad017, type: 3}
       propertyPath: m_UsedByEffector
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2851360469630375865, guid: c0452cca82741604f9bdf5e0cfcad017, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2851360469630375866, guid: c0452cca82741604f9bdf5e0cfcad017, type: 3}
       propertyPath: m_Color.b

@@ -17,8 +17,9 @@ public class PlayerController : MonoBehaviour
 
     [Header("Jump")]
     [SerializeField] private float jumpPower;
+    public BoxCollider2D mybox;
     private int jumpCounter = 0;
-    private bool onGround;
+    public LayerMask ground;
     private bool jumpButtonPressed = false;
     public Transform rotation;
 
@@ -60,11 +61,11 @@ public class PlayerController : MonoBehaviour
             
             Movement();
 
-            if (dashButtonPressed == true && canDash == true /*&*//* PauseMenu.Pause == false*/)
+            if (dashButtonPressed == true && canDash == true)
             {
                 StartCoroutine(Dash());
             }
-            if (jumpButtonPressed == true /*& PauseMenu.Pause==false*/)
+            if ( jumpButtonPressed == true)
             {
                 Jump();
             }
@@ -73,15 +74,15 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
-    #region Collider Checker
-
-    void OnCollisionEnter2D(Collision2D collision)
+    #region GroundCheck
+   
+    private bool GroundCheck()
     {
-        if (collision.gameObject.tag == "Ground")
-        {
-            onGround = true;
-        }
+        float extraHeight = .05f;
+        RaycastHit2D raycasthit = Physics2D.BoxCast(mybox.bounds.center,mybox.bounds.size,0, Vector2.down, extraHeight,ground);
+        return raycasthit.collider != null;
     }
+
 
     #endregion
 
@@ -119,18 +120,23 @@ public class PlayerController : MonoBehaviour
     #region Jump
     public void Jump()
     {
-        if (onGround == true && jumpCounter < 2)
+        if (GroundCheck() && jumpCounter < 2)
         {
             playerAudioSource.PlayOneShot(jumpSound);
             body.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
             jumpCounter++;
-                
+
+        }
+        else if (jumpCounter == 1)
+        {
+            playerAudioSource.PlayOneShot(jumpSound);
+            body.AddForce(Vector2.up * jumpPower * 0.70f, ForceMode2D.Impulse);
+            jumpCounter++;
         }
 
         if (jumpCounter == 2)
         {
-            onGround = false;
-            jumpCounter = 0;
+            Invoke("jumpReset",0.3f); 
         }
         
         jumpButtonPressed = false;
@@ -138,6 +144,10 @@ public class PlayerController : MonoBehaviour
     public void jumpButtonPress()
     {
         jumpButtonPressed = true;        
+    }
+    private void jumpReset()
+    {
+        jumpCounter = 0;
     }
 #endregion
 

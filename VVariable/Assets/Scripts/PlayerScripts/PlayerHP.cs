@@ -25,7 +25,8 @@ public class PlayerHP : MonoBehaviour
    
     [Header ("HP Reseter")]
     public static bool looped = false;
-
+    [Header("Player Position Reset")]
+    public GameObject playerSprite;
     #endregion
 
     #region Start
@@ -49,9 +50,10 @@ public class PlayerHP : MonoBehaviour
     }
     public void RestartGame()
     {
+        PauseMenu.Pause = false;
         SceneManager.LoadScene(1);
         looped = true;
-        PauseMenu.Pause = false;
+   
     }
 
     #endregion
@@ -59,16 +61,17 @@ public class PlayerHP : MonoBehaviour
     #region Respawn
     private void Update()
     {
-        if (Ads.watchedAd==true && currenthp ==0)
+        if (RewardedAdsButton.watchedAd==true && currenthp ==0)
         {
-            Ads.watchedAd = false;
+            RewardedAdsButton.watchedAd = false;
             foreach (GameObject heart in hp)
             {  
                 heart.SetActive(true);
                 currenthp = 2;
-                PauseMenu.Pause = false;
+                playerSprite.transform.position = new Vector3(-5.94f, -3.8f, 0);
             }
         }
+      
     }
 
     #endregion
@@ -83,11 +86,12 @@ public class PlayerHP : MonoBehaviour
             hp[currenthp].SetActive(false);
             if (currenthp > 0)
             {
-              
+                Handheld.Vibrate();
                 currenthp--;
             }
             else
             {
+                Handheld.Vibrate();
                 deathPannel.SetActive(true);
                 PauseMenu.Pause = true;
 
